@@ -23,7 +23,7 @@ model Post {
   id        String @id
   published Boolean @default(true)
   title     String
-  body      String @db.text
+  body      String @db.Text
   authorId  String
 
   author User @relation(fields: [authorId], references: [id])
