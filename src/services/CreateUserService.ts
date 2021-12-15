@@ -1,4 +1,5 @@
 import { hash } from 'bcryptjs';
+import { v4 as uuid } from 'uuid';
 import { PrismaClient } from '.prisma/client';
 
 interface IRequest {
@@ -10,8 +11,8 @@ interface IRequest {
 
 class CreateUserService {
   async execute({ name, email, age, password }: IRequest) {
-    if (!email) {
-      throw new Error('Email required!');
+    if (!email || !name || !password) {
+      throw Error('Email, name and password required!');
     }
     const prisma = new PrismaClient();
 
@@ -22,13 +23,15 @@ class CreateUserService {
     });
 
     if (userAlreadyExists) {
-      throw new Error('Users already exists!');
+      throw Error('Users already exists!');
     }
 
     const passwordHash = await hash(password, 8);
 
+    const id = uuid();
+
     const user = await prisma.user.create({
-      data: { name, email, age, password: passwordHash },
+      data: { id, name, email, age, password: passwordHash },
     });
 
     return user;

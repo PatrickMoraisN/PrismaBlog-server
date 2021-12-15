@@ -14,7 +14,7 @@ class CreateUserController {
       password,
     });
 
-    return response.json({ user });
+    return response.json(user);
   }
 }
 
