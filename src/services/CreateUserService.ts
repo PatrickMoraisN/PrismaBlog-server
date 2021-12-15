@@ -8,13 +8,12 @@ interface IRequest {
   password: string;
 }
 
-const prisma = new PrismaClient();
-
 class CreateUserService {
   async execute({ name, email, age, password }: IRequest) {
     if (!email) {
       throw new Error('Email required!');
     }
+    const prisma = new PrismaClient();
 
     const userAlreadyExists = await prisma.user.findUnique({
       where: {
@@ -28,7 +27,9 @@ class CreateUserService {
 
     const passwordHash = await hash(password, 8);
 
-    const user = await prisma.user.create({ name, email, age, passwordHash });
+    const user = await prisma.user.create({
+      data: { name, email, age, password: passwordHash },
+    });
 
     return user;
   }
