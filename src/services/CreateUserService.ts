@@ -30,11 +30,11 @@ class CreateUserService {
 
     const id = uuid();
 
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: { id, name, email, age, password: passwordHash },
     });
 
-    return user;
+    return { id, name, email, age };
   }
 }
 
