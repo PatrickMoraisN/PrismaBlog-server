@@ -23,7 +23,7 @@ class CreateUserService {
     });
 
     if (userAlreadyExists) {
-      throw Error('Users already exists!');
+      throw Error('User already exists!');
     }
 
     const passwordHash = await hash(password, 8);
