@@ -25,14 +25,6 @@ class CreatePostService {
 
     const post_id = uuid();
 
-    const { name, email, age } = await prisma.user.findUnique({
-      where: {
-        id: authorId,
-      },
-    });
-
-    const user = { name, email, age };
-
     const post = await prisma.post.create({
       data: {
         id: post_id,
@@ -41,9 +33,10 @@ class CreatePostService {
         body,
         authorId,
       },
+      include: { author: true },
     });
 
-    return { post, author: user };
+    return { post };
   }
 }
 
