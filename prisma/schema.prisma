@@ -24,9 +24,8 @@ model Post {
   published Boolean @default(true)
   title     String
   body      String @db.Text
+  author    User?    @relation(fields: [authorId], references: [id])
   authorId  String
-
-  author User @relation(fields: [authorId], references: [id])
 
   @@map("posts")
 }

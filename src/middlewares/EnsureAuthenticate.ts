@@ -27,8 +27,6 @@ class EnsureAuthenticate {
 
       request.user_id = sub;
 
-      console.log('chegou');
-
       return next();
     } catch (error) {
       return response.status(404).json({ error: error.message });

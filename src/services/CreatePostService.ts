@@ -1,6 +1,13 @@
 import { v4 as uuid } from 'uuid';
 import { PrismaClient } from '.prisma/client';
 
+type AuthorIdProps = {
+  id: string;
+  email: string;
+  age: number;
+  name: string;
+};
+
 interface IRequest {
   published?: boolean;
   title: string;
@@ -16,11 +23,19 @@ class CreatePostService {
 
     const prisma = new PrismaClient();
 
-    const id = uuid();
+    const post_id = uuid();
+
+    const { name, email, age } = await prisma.user.findUnique({
+      where: {
+        id: authorId,
+      },
+    });
+
+    const user = { name, email, age };
 
     const post = await prisma.post.create({
       data: {
-        id,
+        id: post_id,
         published,
         title,
         body,
@@ -28,7 +43,7 @@ class CreatePostService {
       },
     });
 
-    return post;
+    return { post, author: user };
   }
 }
 
