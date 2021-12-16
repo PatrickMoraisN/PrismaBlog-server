@@ -18,7 +18,7 @@ class CreatePostService {
 
     const id = uuid();
 
-    const post = prisma.post.create({
+    const post = await prisma.post.create({
       data: {
         id,
         published,

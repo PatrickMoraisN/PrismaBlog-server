@@ -15,7 +15,7 @@ class CreatePostController {
       authorId: user_id,
     });
 
-    return post;
+    return response.json(post);
   }
 }
 
