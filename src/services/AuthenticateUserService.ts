@@ -25,7 +25,7 @@ class AuthenticateUserService {
       throw Error('Email / Password invalid!');
     }
 
-    const isAValidPassword = compare(password, userExists.password);
+    const isAValidPassword = await compare(password, userExists.password);
 
     if (!isAValidPassword) {
       throw Error('Email / Password invalid!');
