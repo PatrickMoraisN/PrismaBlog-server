@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 
 export interface IRequest extends Request {
-  id: string;
+  user_id: string;
 }
 
 interface IVerifyPayload {
@@ -25,7 +25,7 @@ class EnsureAuthenticate {
         process.env.JWT_SECRET
       ) as IVerifyPayload;
 
-      request.id = sub;
+      request.user_id = sub;
 
       return next();
     } catch (error) {
