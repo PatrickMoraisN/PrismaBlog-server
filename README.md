@@ -8,7 +8,7 @@
 - [Media](#camera_flash-media)
 - [About](#monocle_face-about)
 - [Technologies](#rocket-technologies)
-- [Instalation](#hammer_and_wrench-instalation)
+- [Installation](#hammer_and_wrench-instalation)
 - [Author](#closed_book-author)
 <br />
 
@@ -106,7 +106,7 @@ This project was made using the following technologies: <br>
 
 ---
 
-# :hammer_and_wrench: Instalation
+# :hammer_and_wrench: Installation
 **This project involves environment variables, make sure you have them before trying to run!**
 **You must have PostgreSQL!**
 
